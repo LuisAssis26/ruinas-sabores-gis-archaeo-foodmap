@@ -1,6 +1,6 @@
 ﻿# Ruinas & Sabores GIS
 
-"Ruinas & Sabores" is a web mapping experience built for the Geographic Information Systems course (PTAS 2025). The application highlights archaeological heritage around Aveiro (Portugal) and lets visitors discover nearby food, fuel and mobility services through an interactive Leaflet map, contextual filters, and guided interactions.
+"Ruinas & Sabores" is a web mapping experience built for the Geographic Information Systems module in the Information Technologies course at the University of Aveiro. The application highlights archaeological heritage in Portugal and lets visitors discover nearby food, fuel and mobility services through an interactive Leaflet map, contextual filters, and guided interactions.
 
 ## Features
 - Leaflet map with OpenStreetMap, Topographic and Satellite base layers, responsive layout and Bootstrap UI components.
@@ -60,3 +60,4 @@
 
 ## Further Reading
 Consult `Relatorio SIG.pdf` (Portuguese) for detailed methodology, dataset sourcing and user scenarios that guided the implementation.
+
