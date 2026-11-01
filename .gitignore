@@ -1,0 +1,5 @@
+# Configuração local da base de dados (ver config.example.php)
+config.php
+
+# Dependências do Composer
+vendor/

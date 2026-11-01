@@ -24,13 +24,13 @@
 
 ## Prerequisites
 - PHP 8.x with PDO_PGSQL extension enabled (required for the PHP data endpoints).
-- Access to the configured PostgreSQL/PostGIS database (update `conexao.php` if credentials change).
+- Access to a PostgreSQL/PostGIS database (credentials are configured via environment variables or `config.php`, see below).
 - Internet connectivity for third-party services (Leaflet tiles, Bootstrap CDN, Intro.js CDN, Nominatim, OpenRouteService).
 - (Optional) Composer and PHPUnit if you intend to execute the bundled tests.
 
 ## Local Development
 1. Clone the repository and navigate to its root.
-2. (Recommended) copy `conexao.php` and adjust credentials for your environment instead of committing production secrets.
+2. Configure the database connection: either set the environment variables `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`, or copy `config.example.php` to `config.php` (git-ignored) and fill in the values. Set `APP_DEBUG=1` to show PHP errors while developing (off by default).
 3. Start a local PHP server so the static assets and PHP endpoints share the same origin:
    ```bash
    php -S 127.0.0.1:8000
@@ -43,7 +43,7 @@
    ```bash
    composer require --dev phpunit/phpunit
    ```
-2. Execute the test suite (note: the default `phpunit.xml` expects tests under `tests/` - adjust to `Tests/` or update the XML if required):
+2. Execute the test suite (the connection tests are skipped when no database configuration is available):
    ```bash
    vendor/bin/phpunit --configuration phpunit.xml
    ```
@@ -54,7 +54,7 @@
 - Leaflet base layers rely on public tile services subject to fair-use guidelines.
 
 ## Deployment Notes
-- Disable `display_errors` and move database credentials to environment variables before deploying `get_*.php` endpoints.
+- `display_errors` is off by default (enable only with `APP_DEBUG=1`); provide the `DB_*` environment variables or a `config.php` on the server.
 - Consider reverse-proxy caching for static assets and rate limiting for the public APIs.
 - Validate TLS/HTTPS configuration if exposing the application publicly, especially when handling API keys or user data.
 

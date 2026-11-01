@@ -14,16 +14,15 @@
  * @version 1.0
  */
 
-// Ativa a exibição de erros para debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Configuração da base de dados e de erros (display_errors desativado por defeito; APP_DEBUG=1 para ativar)
+require_once 'conexao.php';
 
 // Define o cabeçalho da resposta como JSON
 header("Content-Type: application/json");
 
 // Liga-se à base de dados PostgreSQL/PostGIS
-$conn = pg_connect("REMOVED");
+$connString = getPgConnectionString();
+$conn = $connString !== null ? pg_connect($connString) : false;
 
 // Verifica se a ligação foi bem-sucedida
 if (!$conn) {

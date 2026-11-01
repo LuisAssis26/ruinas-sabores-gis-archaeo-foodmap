@@ -5,6 +5,19 @@ use PHPUnit\Framework\TestCase;
 class ConexaoTest extends TestCase
 {
     /**
+     * Carrega conexao.php e ignora o teste quando a configuração da base de dados
+     * (variáveis DB_* ou config.php) não está disponível.
+     */
+    private function requireDatabase(): void
+    {
+        require_once __DIR__ . '/../conexao.php';
+
+        if (getDbConfig() === null) {
+            $this->markTestSkipped('Configuração da base de dados em falta (variáveis DB_* ou config.php).');
+        }
+    }
+
+    /**
      * Testa a conexão com a base de dados PostgreSQL/PostGIS.
      *
      * Este teste verifica se a função getConnection() retorna uma instância válida de PDO.
@@ -12,7 +25,7 @@ class ConexaoTest extends TestCase
      */
     public function testGetConnection()
     {
-        require_once 'c:/xampp/htdocs/Projeto-Sig/conexao.php';
+        $this->requireDatabase();
 
         $conn = getConnection();
 
@@ -47,7 +60,7 @@ class ConexaoTest extends TestCase
      */
     public function testConnectionAttributes()
     {
-        require_once 'c:/xampp/htdocs/Projeto-Sig/conexao.php';
+        $this->requireDatabase();
 
         $conn = getConnection();
 
@@ -62,7 +75,7 @@ class ConexaoTest extends TestCase
      */
     public function testMultipleConnections()
     {
-        require_once 'c:/xampp/htdocs/Projeto-Sig/conexao.php';
+        $this->requireDatabase();
 
         $conn1 = getConnection();
         $conn2 = getConnection();
@@ -78,7 +91,7 @@ class ConexaoTest extends TestCase
      */
     public function testSimpleQuery()
     {
-        require_once 'c:/xampp/htdocs/Projeto-Sig/conexao.php';
+        $this->requireDatabase();
 
         $conn = getConnection();
 
